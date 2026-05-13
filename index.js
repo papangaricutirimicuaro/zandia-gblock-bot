@@ -1,3 +1,16 @@
+const express = require("express");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("Bot online");
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor web activo en puerto ${PORT}`);
+});
+
 console.log("Archivo index.js ejecutándose...");
 
 const {
@@ -14,6 +27,10 @@ const {
 } = require("discord.js");
 
 const config = require("./config.json");
+
+config.token = process.env.TOKEN || config.token;
+
+client.login(config.token);
 
 const client = new Client({
   intents: [
